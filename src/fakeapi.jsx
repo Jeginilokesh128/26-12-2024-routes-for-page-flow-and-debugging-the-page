@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function FakeApi() {
   const [data, setData] = useState([]); // State to store API data
+  console.log("data ==> ", data);
   const [loading, setLoading] = useState(true); // State to handle loading
   const [error, setError] = useState(null); // State to handle errors
 
