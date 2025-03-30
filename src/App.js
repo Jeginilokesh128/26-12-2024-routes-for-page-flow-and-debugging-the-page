@@ -152,22 +152,22 @@
 // };
 
 // export default App;
-import Card from "./Card";
+// import Card from "./Card";
 
-const App = () => {
-  return (
-    <Card
-      title="Sample Card"
-      description="This is a sample card description."
-      //  childfunction={()=>{}}
-      childfunction={() => {
-        alert("Hello");
-      }}
-    />
-  );
-};
+// const App = () => {
+//   return (
+//     <Card
+//       title="Sample Card"
+//       description="This is a sample card description."
+//       //  childfunction={()=>{}}
+//       childfunction={() => {
+//         alert("Hello");
+//       }}
+//     />
+//   );
+// };
 
-export default App;
+// export default App;
 
 //sending the function defintion as a props to the child component int eh two ways
 //1. directly sending the function defintion to the child component with out any variable name -- this is not reusuable
@@ -182,3 +182,87 @@ export default App;
 //     >
 //       function call{" "}
 //     </h1>;
+
+
+
+
+
+import React, { useState } from "react";
+let staticKey = 0;
+const StateResetComponent = () => {
+  const [key, setKey] = useState(1);
+  // const [staticKey, setStaticKey] = useState(0); // Store staticKey in state
+
+  return (
+    <div
+      style={{
+        padding: "20px",
+        border: "2px solid black",
+        borderRadius: "5px",
+      }}
+    >
+      <h2>State Reset Component</h2>
+
+      {/* State Key Button */}
+      <button onClick={() => setKey(key + 1)}>
+        Reset Appkey Component (State Key)
+      </button>
+
+      {/* Static Key Button */}
+      {/* <button onClick={() => setStaticKey(staticKey + 1)}>
+        StaticKey Reset Appkey Component
+      </button>
+       */}
+
+      <button
+        onClick={() => {
+          staticKey = staticKey + 1;
+          console.log("staticKey", staticKey);
+        }}
+      >
+        staticKey Reset Appkey Component
+      </button>
+
+      {/* Components with Different Keys */}
+      <Appkey
+        key={key*1}
+        keyProp={key}
+        heading="State Key Component duplicate vlaue for the key same vlaue for the second key which allredy used for the first one"
+      />
+
+      <Appkey key={key*2} keyProp={key} heading="State Key Component" />
+      {/* <Appkey
+        key={staticKey}
+        keyProp={staticKey}
+        heading="Static Key Component"
+      /> */}
+      {/* <Appkey
+        key={staticKey}
+        keyProp={staticKey}
+        heading="Static Key Component"
+      /> */}
+    </div>
+  );
+};
+
+const Appkey = ({keyProp, heading }) => {
+  const [count, setCount] = useState(4);
+
+  return (
+    <div
+      style={{
+        marginTop: "20px",
+        padding: "20px",
+        border: "2px solid blue",
+        borderRadius: "5px",
+      }}
+    >
+      <h2>{heading}</h2>
+      <p>Key: {keyProp}</p>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+export default StateResetComponent;
